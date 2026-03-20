@@ -50,6 +50,21 @@ struct TopBarApp: App {
 
             Divider()
 
+            // ── 关于子菜单 ────────────────────────────────────
+            Menu("关于") {
+                Text("v\(AppConfig.currentVersion)")
+                    .disabled(true)
+                Divider()
+                Button("Check for Updates...") {
+                    UpdateManager.shared.checkForUpdates()
+                }
+                Button("View on GitHub") {
+                    NSWorkspace.shared.open(URL(string: AppConfig.githubRepo)!)
+                }
+            }
+
+            Divider()
+
             Button("打开活动监视器") {
                 NSWorkspace.shared.open(
                     URL(fileURLWithPath: "/System/Applications/Utilities/Activity Monitor.app")
