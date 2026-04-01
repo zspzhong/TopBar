@@ -34,6 +34,7 @@ class UpdateManager {
         }
         var request = URLRequest(url: url)
         request.setValue("application/vnd.github+json", forHTTPHeaderField: "Accept")
+        request.timeoutInterval = 10  // 10秒超时
 
         let (data, _) = try await URLSession.shared.data(for: request)
         let json = try JSONDecoder().decode(GitHubRelease.self, from: data)
